@@ -9,3 +9,4 @@ export const RADIUS_BTN = 15;
 export const FULL_WIDTH = Dimensions.get('screen').width;
 export const FULL_HEIGHT = Dimensions.get('screen').height;
 export const FLEX_CENTER = { alignItems: 'center', justifyContent: 'center' };
+export const FLEX_BETWEEN = { alignItems: 'center', justifyContent: 'space-between' };

@@ -2,22 +2,16 @@ import React from 'react'
 import { StyleSheet, SafeAreaView, FlatList, ScrollView } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ExchangeBlock from '../components/ExchangeBlock'
 import { FULL_WIDTH } from '../constants/StyleTypes';
-
+import ConvertInput from '../components/ConvertInput';
 export default function Home() {
     return (
         <SafeAreaView style={styles.container}>
             <Header />
             <ScrollView style={styles.mainBlock}>
-                <ExchangeBlock />
-                <ExchangeBlock />
-                <ExchangeBlock />
-                <ExchangeBlock />
-                <ExchangeBlock />
-                <ExchangeBlock />
-                <ExchangeBlock />
-                <ExchangeBlock />
+                <ConvertInput />
+                <ConvertInput />
+                <ConvertInput />
             </ScrollView>
             <Footer />
         </SafeAreaView>
