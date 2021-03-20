@@ -1,17 +1,31 @@
-import React from 'react'
-import { StyleSheet, SafeAreaView, FlatList, ScrollView } from 'react-native';
+import React, { useEffect } from 'react'
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { FULL_WIDTH } from '../constants/StyleTypes';
 import ConvertInput from '../components/ConvertInput';
+import { useSelector } from 'react-redux';
+
 export default function Home() {
+
+    const nowExchangeData = useSelector(state => state.exc.nowExchanges)
+
     return (
         <SafeAreaView style={styles.container}>
             <Header />
             <ScrollView style={styles.mainBlock}>
-                <ConvertInput />
-                <ConvertInput />
-                <ConvertInput />
+                {
+                    nowExchangeData.map((item, index) => {
+                        return (
+                            <ConvertInput
+                                key={item.id}
+                                largeExcName={item.largeExcName}
+                                smallExcName={item.smallExcName}
+                                sourceExc={item.sourceExc}
+                                comparativeValue={item.comparativeValue} />
+                        )
+                    })
+                }
             </ScrollView>
             <Footer />
         </SafeAreaView>

@@ -5,12 +5,12 @@ import { RADIUS_BTN, FLEX_BETWEEN, FLEX_CENTER, BOLD } from '../constants/StyleT
 import CloseIcn from '../assets/images/icons/close';
 import AzeFlag from '../assets/images/icons/azerbaijan';
 
-export default function ConvertInput() {
+export default function ConvertInput(props) {
     return (
         <View style={styles.blockView}>
             <View style={styles.head}>
                 <TextView style={styles.blockName}>
-                    Azərbaycan manatı
+                    {props.largeExcName}
                 </TextView>
                 <TouchableOpacity>
                     <CloseIcn width={15.5} height={15.5} />
@@ -21,13 +21,13 @@ export default function ConvertInput() {
                     <View style={styles.flag}>
                         <AzeFlag width='100%' height='100%' />
                     </View>
-                    <TextView style={styles.valName}>AZN</TextView>
+                    <TextView style={styles.valName}>{props.smallExcName}</TextView>
                 </View>
                 <TextInput style={styles.input} keyboardType="phone-pad" placeholder="0.0" />
             </View>
             <View style={styles.foot}>
-                <TextView style={styles.footText}>Mənbə: A.R. Mərkəzi Bankı</TextView>
-                <TextView style={styles.footText}>1 AZN = 1 AZN</TextView>
+                <TextView style={styles.footText}>{props.sourceExc}</TextView>
+                <TextView style={styles.footText}>{props.comparativeValue}</TextView>
             </View>
         </View>
     )
