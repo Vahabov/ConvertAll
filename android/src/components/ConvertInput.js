@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
 import TextView from './TextView';
-import { FULL_WIDTH, RADIUS_BTN, FLEX_BETWEEN, FLEX_CENTER, BOLD } from '../constants/StyleTypes';
+import { RADIUS_BTN, FLEX_BETWEEN, FLEX_CENTER, BOLD } from '../constants/StyleTypes';
 import CloseIcn from '../assets/images/icons/close';
 import AzeFlag from '../assets/images/icons/azerbaijan';
 
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: RADIUS_BTN,
         padding: 20,
-        marginBottom: 20
+        marginBottom: 20,
     },
     head: {
         flexDirection: 'row',
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
         color: '#4B545A',
         fontFamily: BOLD,
         textAlign: 'right',
+        textAlignVertical: 'top',
         maxWidth: '60%',
         minWidth: '45%',
     },

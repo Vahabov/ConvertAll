@@ -1,13 +1,24 @@
-import React, { useRef } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, ScrollView, } from 'react-native';
 import Pluse from '../assets/images/icons/pluse.svg';
-import { FLEX_CENTER, COLOR_APP, RADIUS_BTN, FULL_WIDTH, FULL_HEIGHT, BOLD } from '../constants/StyleTypes';
+import { FLEX_CENTER, COLOR_APP, RADIUS_BTN, FULL_WIDTH, FULL_HEIGHT, BOLD, FLEX_BETWEEN, REGULAR, MEDIUM } from '../constants/StyleTypes';
 import TextView from './TextView';
 import RBSheet from "react-native-raw-bottom-sheet";
-import CloseIcn from '../assets/images/icons/close'
+import CloseIcn from '../assets/images/icons/close';
+import DollarBlue from '../assets/images/icons/dollarBlue';
+import DollarWhite from '../assets/images/icons/dollarWhite';
+import BitcoinBlue from '../assets/images/icons/bitcoinBlue';
+import BitcoinWhite from '../assets/images/icons/bitcoinWhite';
+
+import AddExcElem from './AddExcElem';
+import AzeFlag from '../assets/images/icons/azerbaijan';
+import TrFlag from '../assets/images/icons/turkey';
 
 export default function Footer() {
     const refRBSheet = useRef();
+    const refScrollView = useRef();
+    const [scrollValue, setScrollValue] = useState(true);
+
     return (
         <View style={styles.footer}>
             <View style={styles.updateTextView}>
@@ -20,10 +31,11 @@ export default function Footer() {
                 ref={refRBSheet}
                 closeOnDragDown={true}
                 closeOnPressMask={true}
-                height={FULL_HEIGHT - 138}
+                dragFromTopOnly={true}
+                height={FULL_HEIGHT - 110}
                 customStyles={{
                     draggableIcon: {
-                        backgroundColor: "#000",
+                        backgroundColor: "#D5DDE0",
                         marginBottom: 20
                     },
                     container: {
@@ -32,17 +44,67 @@ export default function Footer() {
                         paddingLeft: 20,
                         paddingRight: 20,
                         paddingBottom: 20,
-                        paddingTop: 10
+                        paddingTop: 5
                     }
                 }}
             >
                 <View style={styles.head}>
-                    <TextView style={styles.titleModal}>
-                        Valyuta əlavə et
-                    </TextView>
-                    <TouchableOpacity>
-                        <CloseIcn width={12} height={12} />
+                    <TextView style={styles.titleModal}>Valyuta əlavə et</TextView>
+                    <TouchableOpacity onPress={() => refRBSheet.current.close()}>
+                        <CloseIcn width={14} height={14} />
                     </TouchableOpacity>
+                </View>
+                <View style={styles.main}>
+                    <View style={styles.tabBar}>
+                        <TouchableOpacity
+                            activeOpacity={.7}
+                            style={[styles.btnTab, { backgroundColor: scrollValue ? COLOR_APP : '#fff' }]}
+                            onPress={() => {
+                                refScrollView.current.scrollTo();
+                                setScrollValue(true);
+                            }}>
+
+                            <View style={styles.icnBtn}>
+                                {
+                                    scrollValue ? <DollarWhite width={16} height={16} /> : <DollarBlue width={16} height={16} />
+                                }
+                            </View>
+
+                            <TextView style={{ color: scrollValue ? '#fff' : '#000' }}>Valyuta</TextView>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={.7}
+                            style={[styles.btnTab, { backgroundColor: scrollValue ? '#fff' : COLOR_APP }]}
+                            onPress={() => {
+                                refScrollView.current.scrollToEnd();
+                                setScrollValue(false);
+                            }}>
+
+                            <View style={styles.icnBtn}>
+                                {
+                                    scrollValue ? <BitcoinBlue width={16} height={16} /> : <BitcoinWhite width={16} height={16} />
+                                }
+                            </View>
+
+                            <TextView style={{ color: scrollValue ? '#000' : '#fff' }}>Crypto</TextView>
+                        </TouchableOpacity>
+                    </View>
+                    <ScrollView
+                        contentContainerStyle={styles.tabContainer}
+                        decelerationRate={3}
+                        scrollEnabled={false}
+                        horizontal={true}
+                        showsVerticalScrollIndicator={false}
+                        pagingEnabled={true}
+                        ref={refScrollView}
+                        showsHorizontalScrollIndicator={false}>
+                        <View style={styles.tab}>
+                            <AddExcElem flag={<AzeFlag width='100%' height='100%' />} excName="AZN" />
+                        </View>
+                        <View style={styles.tab}>
+                            <AddExcElem flag={<TrFlag width='100%' height='100%' />} excName="TRY" />
+                        </View>
+                    </ScrollView>
                 </View>
             </RBSheet>
         </View>
@@ -59,7 +121,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        paddingHorizontal: 20,
+        paddingHorizontal: 15,
         position: 'absolute',
         bottom: 0,
         left: 0,
@@ -98,13 +160,47 @@ const styles = StyleSheet.create({
     },
     head: {
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        ...FLEX_BETWEEN
     },
     titleModal: {
         fontFamily: BOLD,
         fontSize: 18,
-        color: '#4B545A'
+        color: '#4B545A',
+        fontFamily: MEDIUM
     },
-
+    main: {
+        flex: 1,
+        marginTop: 20
+    },
+    tabBar: {
+        flexDirection: 'row',
+        ...FLEX_BETWEEN,
+        marginBottom: 20
+    },
+    btnTab: {
+        height: 45,
+        borderRadius: RADIUS_BTN,
+        position: 'relative',
+        paddingHorizontal: 15,
+        ...FLEX_CENTER,
+        minWidth: 150,
+        backgroundColor: '#fff',
+        width: '48%',
+        borderWidth: 1,
+        borderColor: '#eee'
+    },
+    icnBtn: {
+        position: 'absolute',
+        top: 15,
+        left: 15
+    },
+    tabContainer: {
+        overflow: 'hidden'
+    },
+    tab: {
+        width: FULL_WIDTH - 40,
+        flex: 1,
+        borderWidth: 5,
+        borderColor: '#fff'
+    }
 })

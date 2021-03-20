@@ -4,7 +4,7 @@ import { TEXT_COLOR_APP, REGULAR } from '../constants/StyleTypes';
 
 export default function TextView({ children, style, ...rest }) {
     return (
-        <Text adjustsFontSizeToFit={true} style={[styles.textStyle, style]} {...rest}>
+        <Text style={[styles.textStyle, style]} {...rest}>
             {children}
         </Text>
     )

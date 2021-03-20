@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     mainBlock: {
         paddingTop: 20,
         marginBottom: 136,
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: 15,
+        paddingRight: 15,
         width: FULL_WIDTH,
         overflow: 'visible'
     }
