@@ -257,4 +257,4 @@ const styles = StyleSheet.create({
         ...FLEX_CENTER,
         height: FULL_HEIGHT - 350
     }
-})
+});
