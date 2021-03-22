@@ -39,7 +39,7 @@ export default function Footer() {
                 smallExcName={item.smallExcName}
                 largeExcName={item.largeExcName}
             />
-    )
+    );
     const renderCryptoCurrencyElem = ({ item }) => (
         loadingFetchCryptoCurrencies ?
             <View style={styles.loadingIndicator}>
@@ -51,7 +51,7 @@ export default function Footer() {
                 smallExcName={item.smallExcName}
                 largeExcName={item.largeExcName}
             />
-    )
+    );
 
     return (
         <View style={styles.footer}>
