@@ -6,14 +6,14 @@ import Minus from '../assets/images/icons/minus_modal';
 
 import TextView from './TextView';
 
-export default function AddExcElem(props) {
+export default function AddExcElem(props, ...rest) {
     return (
-        <View style={[props.style, styles.exchangeTypeElement]}>
+        <View style={[props.style, styles.exchangeTypeElement]} {...rest}>
             <View style={styles.left}>
                 <View style={styles.flag}>{props.flag}</View>
                 <View>
-                    <TextView style={styles.excName}>{props.excName}</TextView>
-                    <TextView style={styles.excNameLarge}>Azərbaycan manatı</TextView>
+                    <TextView style={styles.excName}>{props.smallExcName}</TextView>
+                    <TextView style={styles.excNameLarge}>{props.largeExcName}</TextView>
                 </View>
             </View>
             <TouchableOpacity style={styles.addBtn}>
