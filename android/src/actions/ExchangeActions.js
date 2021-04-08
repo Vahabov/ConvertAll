@@ -1,40 +1,46 @@
 import axios from '../utils/Api';
-import { FETCH_CURRENCIES, FETCH_CRYPTO_CURRENCIES, LOADING_FETCH_CRYPTO_CURRENCIES, LOADING_FETCH_CURRENCIES } from '../constants/ActionConstants';
+import {
+    FETCH_CURRENCIES,
+    ADD_CURRENCY,
+    REMOVE_CURRENCY,
+} from '../constants/ActionConstants';
 
 export const currenciesFeth = () => {
-    return (dispatch) => {
-        dispatch({
-            type: LOADING_FETCH_CURRENCIES,
-            payload: true
-        })
-        axios.get('todos')
-            .then((res) => {
-                dispatch({
-                    type: FETCH_CURRENCIES,
-                    payload: res.data
-                });
-            })
-            .catch((err) => {
-                console.log("currenciesFeth() -- " + err)
-            })
+    return async (dispatch) => {
+        try {
+            await axios.get('/currencies')
+                .then((res) => {
+                    dispatch({
+                        type: FETCH_CURRENCIES,
+                        payload: res.data
+                    });
+                })
+                .catch((err) => {
+                    console.log("currenciesFeth() -- " + err)
+                })
+        }
+        catch (err) {
+            console.log('currenciesFeth() ----- ' + err)
+        }
     }
 }
 
-export const cryptoCurrenciesFeth = () => {
+
+export const addCurrency = (currency) => {
     return (dispatch) => {
         dispatch({
-            type: LOADING_FETCH_CRYPTO_CURRENCIES,
-            payload: true
+            type: ADD_CURRENCY,
+            payload: currency
         })
-        axios.get('todos')
-            .then((res) => {
-                dispatch({
-                    type: FETCH_CRYPTO_CURRENCIES,
-                    payload: res.data
-                });
-            })
-            .catch((err) => {
-                console.log("cryptoCurrenciesFeth() -- " + err)
-            })
+    }
+}
+
+
+export const removeCurrency = (currencyId) => {
+    return (dispatch) => {
+        dispatch({
+            type: REMOVE_CURRENCY,
+            payload: currencyId
+        });
     }
 }

@@ -3,25 +3,24 @@ import { View, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-nativ
 import TextView from './TextView';
 import { RADIUS_BTN, FLEX_BETWEEN, FLEX_CENTER, BOLD } from '../constants/StyleTypes';
 import CloseIcn from '../assets/images/icons/close';
-import AzeFlag from '../assets/images/icons/azerbaijan';
 
 export default function ConvertInput(props) {
     return (
         <View style={styles.blockView}>
             <View style={styles.head}>
                 <TextView style={styles.blockName}>
-                    {props.largeExcName}
+                    {props.name}
                 </TextView>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={props.onPressRemove}>
                     <CloseIcn width={15.5} height={15.5} />
                 </TouchableOpacity>
             </View>
             <View style={styles.main}>
                 <View style={styles.left}>
                     <View style={styles.flag}>
-                        <AzeFlag width='100%' height='100%' />
+                        {props.flag}
                     </View>
-                    <TextView style={styles.valName}>{props.smallExcName}</TextView>
+                    <TextView style={styles.valName}>{props.code}</TextView>
                 </View>
                 <TextInput style={styles.input} keyboardType="phone-pad" placeholder="0.0" />
             </View>

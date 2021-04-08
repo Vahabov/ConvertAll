@@ -1,206 +1,60 @@
-import { FETCH_CURRENCIES, FETCH_CRYPTO_CURRENCIES, LOADING_FETCH_CURRENCIES, LOADING_FETCH_CRYPTO_CURRENCIES } from '../constants/ActionConstants';
+import {
+    FETCH_CURRENCIES,
+    ADD_CURRENCY,
+    REMOVE_CURRENCY,
+} from '../constants/ActionConstants';
 const initialState = {
-    nowCurrencies: [
-        {
-            id: 1,
-            largeExcName: 'Azərbaycan manatı',
-            smallExcName: 'AZN',
-            sourceExc: 'Mənbə: A.R. Mərkəzi Bankı',
-            comparativeValue: '1 AZN = 1 AZN'
-        },
-        // {
-        //     id: 2,
-        //     largeExcName: 'ABŞ dolları',
-        //     smallExcName: 'USD',
-        //     sourceExc: 'Mənbə: A.R. Mərkəzi Bankı',
-        //     comparativeValue: '1 AZN = 0.5882 USD'
-        // },
-        // {
-        //     id: 3,
-        //     largeExcName: 'Avro',
-        //     smallExcName: 'EUR',
-        //     sourceExc: 'Mənbə: A.R. Mərkəzi Bankı',
-        //     comparativeValue: '1 AZN = 0.4936 EUR'
-        // },
-        // {
-        //     id: 4,
-        //     largeExcName: 'Türk lirəsi',
-        //     smallExcName: 'TRY',
-        //     sourceExc: 'Mənbə: A.R. Mərkəzi Bankı',
-        //     comparativeValue: '1 AZN = 4.3122 TRY'
-        // }
-    ],
-    loadingFetchCurrencies: false,
-    loadingFetchCryptoCurrencies: false,
-    currencies: [
-        {
-            id: 1,
-            largeExcName: 'Azərbaycan manatı',
-            smallExcName: 'AZN',
-        },
-        // {
-        //     id: 2,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 3,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 4,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 5,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 6,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 7,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 8,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 9,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 10,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 11,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 12,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 13,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 14,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-    ],
-    cryptoCurrencies: [
-        {
-            id: 1,
-            largeExcName: 'Azərbaycan manatı',
-            smallExcName: 'AZN',
-        },
-        // {
-        //     id: 2,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 3,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 4,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 5,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 6,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 7,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 8,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 9,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 10,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 11,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 12,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 13,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-        // {
-        //     id: 14,
-        //     largeExcName: 'Azərbaycan manatı',
-        //     smallExcName: 'AZN',
-        // },
-    ]
+    nowCurrencies: [],
+    currencies: [],
 }
 
-export default function AuthReducer(state = initialState, action) {
+export default function ExcReducer(state = initialState, action) {
     switch (action.type) {
         case FETCH_CURRENCIES:
+            var responseJson = action.payload.map(item => {
+                item.isSelect = false;
+                return item;
+            });
             return {
                 ...state,
-                currencies: action.payload,
-                loadingFetchCurrencies: false
+                currencies: responseJson
             }
-        case FETCH_CRYPTO_CURRENCIES:
-            return {
-                ...state,
-                cryptoCurrencies: action.payload,
-                loadingFetchCryptoCurrencies: false
+        case ADD_CURRENCY: {
+            let addedItem = state.nowCurrencies.find(item => {
+                return item.id === action.payload.id
+            });
+            var addFilteredCurrency = state.currencies.filter((item) => {
+                item.id !== action.payload.id ?
+                    null : item.isSelect = !item.isSelect;
+                return item
+            });
+            if (!addedItem) {
+                return {
+                    ...state,
+                    nowCurrencies: [
+                        ...state.nowCurrencies,
+                        action.payload
+                    ]
+                }
             }
-        case LOADING_FETCH_CURRENCIES:
-            return {
-                ...state,
-                loadingFetchCurrencies: action.payload
+            else {
+                return {
+                    ...state,
+                    nowCurrencies: state.nowCurrencies.filter(item => item.id !== action.payload.id),
+                    currencies: addFilteredCurrency
+                }
             }
-        case LOADING_FETCH_CRYPTO_CURRENCIES:
+        }
+        case REMOVE_CURRENCY:
+            var removeFilteredCurrency = state.currencies.filter((item) => {
+                item.id === action.payload ?
+                    item.isSelect = false : null;
+                return item
+            });
             return {
                 ...state,
-                loadingFetchCryptoCurrencies: action.payload
+                nowCurrencies: state.nowCurrencies.filter(item => item.id !== action.payload),
+                currencies: removeFilteredCurrency
             }
         default:
             return state
